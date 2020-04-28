@@ -67,7 +67,9 @@ contract CSFeature is CSFeatureInterface, Ownable {
 
       transferOwnership(__owner);
       _admins.add(__owner);
-      _admins.add(msg.sender);
+      if (__owner != msg.sender){
+        _admins.add(msg.sender);
+      }
       wkbHash = _wkbHash;
       dggsIndex = _dggsIndex;
       geomteryType = CSGeometryLib.CSGeometryType.GM_POINT;
