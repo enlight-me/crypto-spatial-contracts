@@ -4,33 +4,7 @@ import "truffle/Assert.sol";
 import "truffle/DeployedAddresses.sol";
 import '../contracts/crypto-spatial/CSFeatureRegistry.sol';
 import '../contracts/crypto-spatial/CSFeature.sol';
-
-/**
-  * Required contract since CSFeatureRegistry has no add feature function
-  */
-contract TestRegistry is CSFeatureRegistry {
-
-  /// @notice constuctor
-  constructor (string memory _name, uint _h3Resolution, string memory _srs) public
-  CSFeatureRegistry(_name,_h3Resolution,_srs) {
-    name = "Test Registry";
-  }
-
-  /**
-   * Required function to add features
-   */
-  function claimFeature (bytes15 dggsIndex,
-                       bytes32 wkbHash)
-      public addFeature( dggsIndex, wkbHash, msg.sender)
-      returns (bytes32) {
-
-    CSFeature feature = new CSFeature(dggsIndex,wkbHash, msg.sender, h3Resolution);
-    bytes32 csc = feature.getFeatureCSC();
-    features[csc] = address(feature);
-    return csc;
-  }
-
-}
+import '../contracts/crypto-spatial/TestRegistry.sol';
 
 /**
   * The Test contract
@@ -39,7 +13,7 @@ contract TestRegistry is CSFeatureRegistry {
 contract TestCSFeatureRegistry {
 
     uint h3Resolution = 15;
-    string name = "FeatureRegistryRegistry";
+    string name = "FeatureRegistry";
     string srs = "EPSG:3857";
 
     bytes15 dggsIndex = bytes15(0x386632383334373064393231633630);

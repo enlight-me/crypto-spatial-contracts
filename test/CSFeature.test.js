@@ -5,7 +5,7 @@
 
 let catchRevert = require("./exceptionHelpers").catchRevert
 const truffleAssert = require('truffle-assertions');
-var CSFeature = artifacts.require("./CSFeature.sol");
+var CSFeature = artifacts.require("./crypto-spatial/CSFeature.sol");
 
 
   //kill setWkbHash onlyadmins
@@ -36,7 +36,7 @@ contract('CSFeature', function (accounts) {
   it("Should return the correct initial values of the state variables", async () => {
     var featureValues = await instance.fetchFeature();
     
-    assert.equal(featureValues[0], csc, "The parcel csc should be " + csc);
+    assert.equal(featureValues[0], csc, "The feature csc should be " + csc);
     assert.equal(featureValues[1], dggsIndex, "The dggsIndex should be " + dggsIndex);
     assert.equal(featureValues[2], wkbHash, "The wkbHash should be " + wkbHash);
     assert.equal(featureValues[3], owner, "The owner is set to incorrect value");
@@ -53,7 +53,7 @@ contract('CSFeature', function (accounts) {
     // console.log(returnedGeometryType);    // ??? returned value is a transaction 
     // assert.equal(returnedGeometryType, GeometryType.POINT, "The GeometryType should be POINT");
 
-    assert.equal(returnedCSC, csc, "The parcel csc should be " + csc);
+    assert.equal(returnedCSC, csc, "The feature csc should be " + csc);
     assert.equal(returnedDggsIndex, dggsIndex, "The dggsIndex should be " + dggsIndex);
   });
 
